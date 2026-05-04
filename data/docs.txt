@@ -1,0 +1,5 @@
+Machine learning is a field of artificial intelligence that focuses on building systems that learn from data.
+
+Deep learning is a subset of machine learning that uses neural networks with many layers.
+
+Natural language processing allows computers to understand human language.
