@@ -22,8 +22,8 @@ def insert_data(points):
     )
 
 def search_vector(query_vector, top_k=5):
-    return client.search(
+    return client.query_points(
         collection_name=COLLECTION_NAME,
-        query_vector=query_vector,
+        query=query_vector,
         limit=top_k
     )
