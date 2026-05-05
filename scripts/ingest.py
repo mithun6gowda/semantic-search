@@ -3,7 +3,7 @@ from app.vector_db import create_collection, insert_data
 from qdrant_client.models import PointStruct
 import uuid
 
-def chunk_text(text, chunk_size=300, overlap=50):
+def chunk_text(text, chunk_size=50, overlap=10):
     words = text.split()
     chunks = []
 
@@ -38,5 +38,7 @@ def ingest():
 
 
     insert_data(points)
+
 if __name__ == "__main__":
+
     ingest()
