@@ -19,15 +19,12 @@ def ingest():
     with open("data/docs.txt") as f:
         text = f.read()
 
-    print("📄 TEXT LENGTH:", len(text))   # 👈 ADD THIS
 
     chunks = chunk_text(text)
-    print("🧩 CHUNKS:", len(chunks))      # 👈 ADD THIS
 
     points = []
 
     for chunk in chunks:
-        print("➡️ Processing chunk:", chunk[:50])  # 👈 ADD THIS
 
         vector = get_embedding(chunk)
 
@@ -39,9 +36,7 @@ def ingest():
             )
         )
 
-    print("📦 POINTS TO INSERT:", len(points))  # 👈 ADD THIS
 
     insert_data(points)
-    print("✅ Data inserted")
 if __name__ == "__main__":
     ingest()
