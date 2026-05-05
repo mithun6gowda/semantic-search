@@ -8,8 +8,8 @@ def semantic_search(query: str, top_k=5):
 
     return [
         {
-            "score": r.score,
-            "text": r.payload["text"]
+            "score": point.score,
+            "text": point.payload.get("text", "")
         }
-        for r in results
+        for point in results.points
     ]

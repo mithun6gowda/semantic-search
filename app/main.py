@@ -3,7 +3,10 @@ from app.search import semantic_search
 
 app = FastAPI()
 
+@app.get("/")
+def root():
+    return {"message": "API running"}
+
 @app.get("/search")
 def search(query: str):
-    results = semantic_search(query)
-    return {"results": results}
+    return {"results": semantic_search(query)}
