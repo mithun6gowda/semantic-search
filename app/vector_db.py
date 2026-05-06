@@ -1,10 +1,8 @@
 from qdrant_client import QdrantClient
 from qdrant_client.models import VectorParams, Distance
-from app.config import *
+from app.config import COLLECTION_NAME, VECTOR_SIZE, QDRANT_HOST, QDRANT_PORT
 
 client = QdrantClient(host=QDRANT_HOST, port=QDRANT_PORT)
-
-print("✅ vector_db.py LOADED")
 
 def create_collection():
     client.recreate_collection(
@@ -22,8 +20,9 @@ def insert_data(points):
     )
 
 def search_vector(query_vector, top_k=5):
-    return client.query_points(
+    response = client.query_points(
         collection_name=COLLECTION_NAME,
         query=query_vector,
         limit=top_k
     )
+    return response.points  

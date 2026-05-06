@@ -11,5 +11,5 @@ def semantic_search(query: str, top_k=5):
             "score": point.score,
             "text": point.payload.get("text", "")
         }
-        for point in results.points
+        for point in results
     ]

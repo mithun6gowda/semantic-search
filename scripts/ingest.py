@@ -3,14 +3,14 @@ from app.vector_db import create_collection, insert_data
 from qdrant_client.models import PointStruct
 import uuid
 
-def chunk_text(text, chunk_size=50, overlap=10):
+def chunk_text(text, chunk_size=40, overlap=10):
     words = text.split()
     chunks = []
 
     for i in range(0, len(words), chunk_size - overlap):
         chunk = " ".join(words[i:i+chunk_size])
         chunks.append(chunk)
-
+        print("🧩 CHUNKS:", chunks)
     return chunks
 
 def ingest():
