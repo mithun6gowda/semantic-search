@@ -11,7 +11,10 @@ def chunk_text(text, chunk_size=40, overlap=10):
         chunk = " ".join(words[i:i+chunk_size])
         chunks.append(chunk)
         print("🧩 CHUNKS:", chunks)
-    return chunks
+        print("🧩 CHUNKS:")
+    for c in chunks:
+        print("-", c)
+    return [chunk.strip() for chunk in text.split("\n") if chunk.strip()]
 
 def ingest():
     create_collection()
