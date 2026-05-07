@@ -6,9 +6,6 @@ from app.pdf_loader import extract_text_from_pdf
 from app.web_loader import fetch_text_from_url
 from qdrant_client.models import PointStruct
 
-# ======================
-# CONFIG
-# ======================
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PDF_DIR = os.path.join(BASE_DIR, "data", "pdfs")
 
@@ -19,13 +16,6 @@ HEALTH_URLS = [
     "https://www.nhs.uk/conditions/diabetes/"
 ]
 
-print("📁 Using PDF path:", PDF_DIR)
-print("📁 Files found:", os.listdir(PDF_DIR))
-
-
-# ======================
-# CHUNKING
-# ======================
 def chunk_text(text, chunk_size=80, overlap=20):
     words = text.split()
     chunks = []
@@ -36,19 +26,15 @@ def chunk_text(text, chunk_size=80, overlap=20):
 
     return chunks
 
-
-# ======================
-# PROCESS TEXT (REUSABLE)
-# ======================
 def process_text(text, source, source_type, points):
     if not text.strip():
-        print(f"❌ Skipping empty source: {source}")
+        print(f" Skipping empty source: {source}")
         return
 
     chunks = chunk_text(text)
 
     if not chunks:
-        print(f"❌ No chunks from: {source}")
+        print(f" No chunks from: {source}")
         return
 
     print(f"🧩 Chunks from {source_type}: {len(chunks)}")
@@ -68,15 +54,11 @@ def process_text(text, source, source_type, points):
             )
         )
 
-
-# ======================
-# INGEST
-# ======================
 def ingest():
     create_collection()
     points = []
 
-    # 🔹 PDF INGESTION
+    #  PDF INGESTION
     for file in os.listdir(PDF_DIR):
         if file.endswith(".pdf"):
             path = os.path.join(PDF_DIR, file)
@@ -89,7 +71,7 @@ def ingest():
 
             process_text(text, file, "pdf", points)
 
-    # 🔹 WEB INGESTION
+    #  WEB INGESTION
     for url in HEALTH_URLS:
         print(f"\n🌐 Fetching URL: {url}")
 
@@ -99,17 +81,14 @@ def ingest():
 
         process_text(text, url, "web", points)
 
-    # ======================
-    # FINAL INSERT
-    # ======================
-    print("\n📦 Total chunks:", len(points))
+    print(" Total chunks:", len(points))
 
     if not points:
-        print("❌ No valid data extracted. Nothing to insert.")
+        print("No valid data extracted. Nothing to insert.")
         return
 
     insert_data(points)
-    print("✅ Data inserted")
+    print("Data inserted")
 
 
 if __name__ == "__main__":
