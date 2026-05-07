@@ -12,5 +12,5 @@ def fetch_text_from_url(url):
         return text
 
     except Exception as e:
-        print(f"❌ Failed to fetch {url}: {e}")
+        print(f" Failed to fetch {url}: {e}")
         return ""

@@ -37,7 +37,7 @@ def process_text(text, source, source_type, points):
         print(f" No chunks from: {source}")
         return
 
-    print(f"🧩 Chunks from {source_type}: {len(chunks)}")
+    print(f" Chunks from {source_type}: {len(chunks)}")
 
     for chunk in chunks:
         vector = get_embedding(chunk)
@@ -63,21 +63,21 @@ def ingest():
         if file.endswith(".pdf"):
             path = os.path.join(PDF_DIR, file)
 
-            print(f"\n📄 Processing PDF: {file}")
+            print(f" Processing PDF: {file}")
 
             text = extract_text_from_pdf(path)
 
-            print(f"📄 Text length: {len(text)}")
+            print(f"Text length: {len(text)}")
 
             process_text(text, file, "pdf", points)
 
     #  WEB INGESTION
     for url in HEALTH_URLS:
-        print(f"\n🌐 Fetching URL: {url}")
+        print(f" Fetching URL: {url}")
 
         text = fetch_text_from_url(url)
 
-        print(f"📄 Text length: {len(text)}")
+        print(f"Text length: {len(text)}")
 
         process_text(text, url, "web", points)
 
