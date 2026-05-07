@@ -26,3 +26,4 @@ def search_vector(query_vector, top_k=5):
         limit=top_k
     )
     return response.points  
+
